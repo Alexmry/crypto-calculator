@@ -19,7 +19,9 @@ class PortfolioContainer extends Component {
   }
 
   handleChange(e) {
-
+    // this.setState({
+    //     [e.target.name]: e.target.value,
+    // });
 
     axios.post("http://localhost:3000/search", {
     //   name: this.state.name
@@ -27,13 +29,14 @@ class PortfolioContainer extends Component {
     })
     .then((data) => {
         this.setState({
-          [e.target.name]: e.target.value,
+            search_results: [...data.data.currencies]
         });
     })
     .catch((data) => {
         debugger 
     })
     //   console.log(this.state.name)
+      console.log(this.state.search_results)
   }
 
   render() {
