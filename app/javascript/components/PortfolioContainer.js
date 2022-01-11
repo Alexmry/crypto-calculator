@@ -19,15 +19,16 @@ class PortfolioContainer extends Component {
   }
 
   handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+
 
     axios.post("http://localhost:3000/search", {
-      name: this.state.name
+    //   name: this.state.name
+      search: e.target.value
     })
     .then((data) => {
-        debugger 
+        this.setState({
+          [e.target.name]: e.target.value,
+        });
     })
     .catch((data) => {
         debugger 
