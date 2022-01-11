@@ -42,7 +42,7 @@ class PortfolioContainer extends Component {
   render() {
     return (
       <div>
-        <Search handleChange={this.handleChange} />
+        <Search searchResults={this.state.search_results} handleChange={this.handleChange} />
         <Calculate />
       </div>
     );
