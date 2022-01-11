@@ -1,6 +1,7 @@
 class Currency < ApplicationRecord
-    def request(type, url, opts = {})
-        request = HTTParty.send(type, url, opts)
+
+    def calculate_value(amount)
+        (current_price * amount.to_f).round(4)
     end
 
     def current_price
@@ -11,7 +12,6 @@ class Currency < ApplicationRecord
         url = "https://api.coincap.io/v2/assets/"
 
         request = HTTParty.get(url + self.slug)
-        response = JSON.parse(request.body)
-        response.dig('data', 'priceUsd').to_f
+        response = JSON.parse(request.body).dig('data', 'priceUsd').to_f
     end
 end
