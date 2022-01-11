@@ -12,5 +12,6 @@ class Currency < ApplicationRecord
 
         request = HTTParty.get(url + self.slug)
         response = JSON.parse(request.body)
+        response.dig('data', 'priceUsd').to_f
     end
 end
