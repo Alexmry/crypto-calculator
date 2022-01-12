@@ -38,7 +38,7 @@ class PortfolioContainer extends Component {
         debugger;
       });
     //   console.log(this.state.name)
-    console.log(this.state.search_results);
+    // console.log(this.state.search_results);
   }
 
   handleSelect(e) {
@@ -49,21 +49,26 @@ class PortfolioContainer extends Component {
       (item) => item.id == parseInt(id)
     );
     this.setState({
-      active_currency:  activeCurrency[0],
-      search_results: []
-    })
+      active_currency: activeCurrency[0],
+      search_results: [],
+    });
     // debugger
   }
 
   render() {
+    const searchOrCalculate = this.state.active_currency ? (
+      <Calculate />
+    ) : (
+      <Search
+        handleSelect={this.handleSelect}
+        searchResults={this.state.search_results}
+        handleChange={this.handleChange}
+      />
+    );
+
     return (
       <div>
-        <Search
-          handleSelect={this.handleSelect}
-          searchResults={this.state.search_results}
-          handleChange={this.handleChange}
-        />
-        <Calculate />
+        {searchOrCalculate}
       </div>
     );
   }
