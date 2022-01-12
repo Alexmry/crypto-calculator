@@ -21,7 +21,7 @@ class Search extends Component {
               name="name"
               placeholder="Add Cryptocurrency"
               value={this.props.name}
-              className="fill"
+              className="field"
             />
           </div>
           <div className="currency-list">

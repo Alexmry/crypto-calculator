@@ -8,7 +8,7 @@ class PortfolioContainer extends Component {
     super(props);
 
     this.state = {
-      name: "",
+      // name: "",
       portfolio: [],
       search_results: [],
       active_currency: null,
@@ -44,7 +44,7 @@ class PortfolioContainer extends Component {
   handleSelect(e) {
     e.preventDefault();
     const id = e.target.getAttribute("data-id");
-    console.log(id);
+    // console.log(id);
     const activeCurrency = this.state.search_results.filter(
       (item) => item.id == parseInt(id)
     );
@@ -55,9 +55,44 @@ class PortfolioContainer extends Component {
     // debugger
   }
 
+  handleSubmit() {
+    e.preventDefault()
+
+    let currency = this.state.active_currency
+    let amount = this.state.amount
+
+    axios
+    .post("http://localhost:3000/calculate", {
+      //   name: this.state.name
+      id: currency.id,
+      amount: amount
+    })
+    .then((data) => {
+      this.setState({
+        amount: '',
+        active_currency: null,
+        portfolio: [...this.state.portfolio, data.data]
+      });
+    })
+    .catch((data) => {
+      debugger;
+    });
+  }
+
+  handleAmount() {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
   render() {
     const searchOrCalculate = this.state.active_currency ? (
-      <Calculate />
+      <Calculate
+      handleChange={this.handleChange}
+      handleSubmit={this.handleSubmit}
+      active_currency={this.props.active_currency}
+      amount={this.state.amount}
+      />
     ) : (
       <Search
         handleSelect={this.handleSelect}
@@ -66,11 +101,7 @@ class PortfolioContainer extends Component {
       />
     );
 
-    return (
-      <div>
-        {searchOrCalculate}
-      </div>
-    );
+    return <div>{searchOrCalculate}</div>;
   }
 }
 
