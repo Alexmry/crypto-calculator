@@ -24,31 +24,45 @@ class PortfolioContainer extends Component {
     //     [e.target.name]: e.target.value,
     // });
 
-    axios.post("http://localhost:3000/search", {
-    //   name: this.state.name
-      search: e.target.value
-    })
-    .then((data) => {
+    axios
+      .post("http://localhost:3000/search", {
+        //   name: this.state.name
+        search: e.target.value,
+      })
+      .then((data) => {
         this.setState({
-            search_results: [...data.data.currencies]
+          search_results: [...data.data.currencies],
         });
-    })
-    .catch((data) => {
-        debugger 
-    })
+      })
+      .catch((data) => {
+        debugger;
+      });
     //   console.log(this.state.name)
-      console.log(this.state.search_results)
+    console.log(this.state.search_results);
   }
 
   handleSelect(e) {
-    e.preventDefault()
-    debugger 
+    e.preventDefault();
+    const id = e.target.getAttribute("data-id");
+    console.log(id);
+    const activeCurrency = this.state.search_results.filter(
+      (item) => item.id == parseInt(id)
+    );
+    this.setState({
+      active_currency:  activeCurrency[0],
+      search_results: []
+    })
+    // debugger
   }
 
   render() {
     return (
       <div>
-        <Search handleSelect={this.handleSelect } searchResults={this.state.search_results} handleChange={this.handleChange} />
+        <Search
+          handleSelect={this.handleSelect}
+          searchResults={this.state.search_results}
+          handleChange={this.handleChange}
+        />
         <Calculate />
       </div>
     );
