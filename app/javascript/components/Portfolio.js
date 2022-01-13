@@ -21,7 +21,7 @@ class Portfolio extends Component {
           <div className="portfolio-value--header">
             Your Total Portfolio Value is:
           </div>
-          <div className="portfolio-value--content">{total}</div>
+          <div className="portfolio-value--content">${total}</div>
         </div>
         <div className="portfolio-items">{portfolioItems}</div>
       </div>

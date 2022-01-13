@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Search from "./Search";
 import Calculate from "./Calculate";
 import axios from "axios";
-import Portfolio  from "./Portfolio";
+import Portfolio from "./Portfolio";
 
 class PortfolioContainer extends Component {
   constructor(props) {
@@ -59,44 +59,44 @@ class PortfolioContainer extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    let currency = this.state.active_currency
-    let amount = this.state.amount
+    let currency = this.state.active_currency;
+    let amount = this.state.amount;
 
     axios
-    .post("http://localhost:3000/calculate", {
-      //   name: this.state.name
-      id: currency.id,
-      amount: amount
-    })
-    .then((data) => {
-      console.log(data)
-      this.setState({
-        amount: '',
-        active_currency: null,
-        portfolio: [...this.state.portfolio, data.data]
+      .post("http://localhost:3000/calculate", {
+        //   name: this.state.name
+        id: currency.id,
+        amount: amount,
+      })
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          amount: "",
+          active_currency: null,
+          portfolio: [...this.state.portfolio, data.data],
+        });
+      })
+      .catch((data) => {
+        debugger;
       });
-    })
-    .catch((data) => {
-      debugger;
-    });
     // console.log(this.state)
   }
 
   handleAmount(e) {
     this.setState({
-      [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
   }
 
   render() {
     const searchOrCalculate = this.state.active_currency ? (
       <Calculate
-      handleChange={this.handleAmount}
-      handleSubmit={this.handleSubmit}
-      active_currency={this.props.active_currency}
-      amount={this.state.amount}
+        handleChange={this.handleAmount}
+        handleSubmit={this.handleSubmit}
+        active_currency={this.props.active_currency}
+        amount={this.state.amount}
       />
     ) : (
       <Search
@@ -107,10 +107,13 @@ class PortfolioContainer extends Component {
     );
 
     return (
-    <div>
-      {searchOrCalculate}
-      <Portfolio portfolio={this.state.portfolio}/> 
-      </div>);
+      <div className="grid">
+        <div className="left">{searchOrCalculate}</div>
+        <div className="right">
+          <Portfolio portfolio={this.state.portfolio} />
+        </div>
+      </div>
+    );
   }
 }
 
