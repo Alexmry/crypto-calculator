@@ -17,7 +17,7 @@ class Calculate extends Component {
               onChange={this.props.handleChange}
               autoComplete="off"
               type="text"
-              name="name"
+              name="amount"
               placeholder="How much do you own?"
               value={this.props.amount}
               className="field"

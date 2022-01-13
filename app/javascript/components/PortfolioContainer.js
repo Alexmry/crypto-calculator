@@ -92,10 +92,10 @@ class PortfolioContainer extends Component {
   render() {
     const searchOrCalculate = this.state.active_currency ? (
       <Calculate
-      handleChange={this.handleChange}
+      handleChange={this.handleAmount}
       handleSubmit={this.handleSubmit}
       active_currency={this.props.active_currency}
-      amount={this.props.amount}
+      amount={this.state.amount}
       />
     ) : (
       <Search
