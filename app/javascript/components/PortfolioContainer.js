@@ -109,7 +109,7 @@ class PortfolioContainer extends Component {
     return (
     <div>
       {searchOrCalculate}
-      <Portfolio Portfolio={this.state.portfolio}/> 
+      <Portfolio portfolio={this.state.portfolio}/> 
       </div>);
   }
 }
