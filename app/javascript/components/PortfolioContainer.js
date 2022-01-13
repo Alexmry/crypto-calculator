@@ -17,6 +17,8 @@ class PortfolioContainer extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAmount = this.handleAmount.bind(this);
   }
 
   handleChange(e) {
@@ -55,7 +57,7 @@ class PortfolioContainer extends Component {
     // debugger
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
     e.preventDefault()
 
     let currency = this.state.active_currency
@@ -68,6 +70,7 @@ class PortfolioContainer extends Component {
       amount: amount
     })
     .then((data) => {
+      console.log(data)
       this.setState({
         amount: '',
         active_currency: null,
@@ -77,9 +80,10 @@ class PortfolioContainer extends Component {
     .catch((data) => {
       debugger;
     });
+    // console.log(this.state)
   }
 
-  handleAmount() {
+  handleAmount(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -91,7 +95,7 @@ class PortfolioContainer extends Component {
       handleChange={this.handleChange}
       handleSubmit={this.handleSubmit}
       active_currency={this.props.active_currency}
-      amount={this.state.amount}
+      amount={this.props.amount}
       />
     ) : (
       <Search

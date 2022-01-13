@@ -12,7 +12,7 @@ class Calculate extends Component {
         <form onSubmit={this.props.handleSubmit}>
           <div className="form-group">
             <label>Enter Amount Owned:</label>
-            <br />
+            <br/>
             <input
               onChange={this.props.handleChange}
               autoComplete="off"
