@@ -8,7 +8,8 @@ class Portfolio extends Component {
 
   render() {
 
-    const PortfolioItems = this.props.portfolio.map((item, index) => )
+    const portfolioItems = this.props.portfolio.map((item, index) => <PortfolioItem key={index} item={item}/>)
+    const total = this.props.portfolio.reduce((total, curr) => total + curr.value, 0)
 
       return (
           <div>
